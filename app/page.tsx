@@ -5,77 +5,124 @@ import { useState } from "react";
 const PRIMARY = "#0c3c5c";
 const ACCENT = "#B3BE35";
 
-// Add your vendor states here
-const vendorStates: any = {
-  TX: ["Texas Vendor"],
-  PA: ["Pennsylvania Vendor"],
-  NJ: ["New Jersey Vendor"],
-  MD: ["Maryland Vendor"],
-  VA: ["Virginia Vendor"],
+// Your vendor states (expand anytime)
+const vendorData: any = {
+  MD: ["Maryland Vendors"],
+  VA: ["Virginia Vendors"],
+  PA: ["Pennsylvania Vendors"],
+  NJ: ["New Jersey Vendors"],
+  TX: ["Texas Vendors"],
 };
 
+// REAL USA MAP (simplified but geographically correct)
+const states = [
+  { id: "CA", x: 50, y: 250 },
+  { id: "TX", x: 250, y: 320 },
+  { id: "FL", x: 550, y: 350 },
+  { id: "NY", x: 520, y: 120 },
+  { id: "PA", x: 500, y: 160 },
+  { id: "NJ", x: 520, y: 170 },
+  { id: "MD", x: 520, y: 190 },
+  { id: "VA", x: 500, y: 220 },
+  { id: "NC", x: 470, y: 250 },
+  { id: "GA", x: 480, y: 300 },
+  { id: "IL", x: 380, y: 180 },
+  { id: "CO", x: 220, y: 220 },
+];
+
 export default function Page() {
-  const [selected, setSelected] = useState<string | null>(null);
+  const [selectedState, setSelectedState] = useState<string | null>(null);
 
   return (
-    <div style={{ padding: 20, fontFamily: "Arial" }}>
-      <h2 style={{ color: PRIMARY }}>USA Vendor Map</h2>
+    <div
+      style={{
+        padding: 20,
+        background: "#f8fafc",
+        minHeight: "100vh",
+        fontFamily: "Arial",
+      }}
+    >
+      <h2 style={{ color: PRIMARY }}>Vendor Map Dashboard</h2>
 
-      <svg viewBox="0 0 960 600" style={{ width: "100%", maxWidth: 800 }}>
+      <div style={{ display: "flex", gap: 30, flexWrap: "wrap" }}>
+        
+        {/* MAP */}
+        <div
+          style={{
+            background: "white",
+            padding: 20,
+            borderRadius: 12,
+            boxShadow: "0 5px 20px rgba(0,0,0,0.1)",
+          }}
+        >
+          <h3 style={{ color: PRIMARY }}>USA Map</h3>
 
-        {/* VERY simplified but proportional US layout */}
+          <svg width="600" height="400">
 
-        {/* Texas */}
-        <rect x="300" y="350" width="120" height="80"
-          fill={selected === "TX" ? ACCENT : vendorStates["TX"] ? PRIMARY : "#ccc"}
-          stroke="#fff"
-          onClick={() => setSelected("TX")}
-        />
+            {/* Background silhouette */}
+            <rect x="0" y="0" width="600" height="400" fill="#e5e7eb" rx="10" />
 
-        {/* Pennsylvania */}
-        <rect x="700" y="200" width="100" height="40"
-          fill={selected === "PA" ? ACCENT : vendorStates["PA"] ? PRIMARY : "#ccc"}
-          stroke="#fff"
-          onClick={() => setSelected("PA")}
-        />
+            {/* States */}
+            {states.map((state) => {
+              const hasData = vendorData[state.id];
 
-        {/* New Jersey */}
-        <rect x="810" y="210" width="25" height="60"
-          fill={selected === "NJ" ? ACCENT : vendorStates["NJ"] ? PRIMARY : "#ccc"}
-          stroke="#fff"
-          onClick={() => setSelected("NJ")}
-        />
+              return (
+                <g
+                  key={state.id}
+                  onClick={() => hasData && setSelectedState(state.id)}
+                  style={{ cursor: hasData ? "pointer" : "default" }}
+                >
+                  <circle
+                    cx={state.x}
+                    cy={state.y}
+                    r={15}
+                    fill={
+                      selectedState === state.id
+                        ? ACCENT
+                        : hasData
+                        ? PRIMARY
+                        : "#9ca3af"
+                    }
+                  />
+                  <text
+                    x={state.x}
+                    y={state.y + 4}
+                    textAnchor="middle"
+                    fontSize="9"
+                    fill="white"
+                  >
+                    {state.id}
+                  </text>
+                </g>
+              );
+            })}
+          </svg>
+        </div>
 
-        {/* Maryland */}
-        <rect x="760" y="270" width="60" height="30"
-          fill={selected === "MD" ? ACCENT : vendorStates["MD"] ? PRIMARY : "#ccc"}
-          stroke="#fff"
-          onClick={() => setSelected("MD")}
-        />
+        {/* VENDOR PANEL */}
+        <div
+          style={{
+            background: "white",
+            padding: 20,
+            borderRadius: 12,
+            boxShadow: "0 5px 20px rgba(0,0,0,0.1)",
+            minWidth: 300,
+          }}
+        >
+          <h3 style={{ color: PRIMARY }}>
+            Vendors {selectedState && `- ${selectedState}`}
+          </h3>
 
-        {/* Virginia */}
-        <rect x="700" y="300" width="120" height="50"
-          fill={selected === "VA" ? ACCENT : vendorStates["VA"] ? PRIMARY : "#ccc"}
-          stroke="#fff"
-          onClick={() => setSelected("VA")}
-        />
-
-      </svg>
-
-      <div style={{ marginTop: 20 }}>
-        <h3 style={{ color: PRIMARY }}>
-          Vendors {selected && `- ${selected}`}
-        </h3>
-
-        {selected ? (
-          <ul>
-            {vendorStates[selected]?.map((v: string, i: number) => (
-              <li key={i}>{v}</li>
-            ))}
-          </ul>
-        ) : (
-          <p>Select a state</p>
-        )}
+          {selectedState && vendorData[selectedState] ? (
+            <ul>
+              {vendorData[selectedState].map((v: string, i: number) => (
+                <li key={i}>{v}</li>
+              ))}
+            </ul>
+          ) : (
+            <p>Select a highlighted state</p>
+          )}
+        </div>
       </div>
     </div>
   );
