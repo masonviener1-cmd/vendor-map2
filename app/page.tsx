@@ -5,7 +5,6 @@ import { useState } from "react";
 const PRIMARY = "#0c3c5c";
 const ACCENT = "#B3BE35";
 
-// Dot positions (we will fine-tune later if needed)
 const statePositions: any = {
   CA: { x: 85, y: 230 },
   TX: { x: 300, y: 315 },
@@ -17,7 +16,6 @@ const statePositions: any = {
   VA: { x: 500, y: 235 },
 };
 
-// Vendor data
 const vendorData: any = {
   TX: ["Texas Vendor 1", "Texas Vendor 2"],
   MD: ["Maryland Vendor"],
@@ -36,9 +34,9 @@ export default function Page() {
     <div style={{ padding: 20, fontFamily: "Arial" }}>
       <h2 style={{ color: PRIMARY }}>Vendor Map Dashboard</h2>
 
-      <div style={{ display: "flex", gap: 40, alignItems: "flex-start" }}>
+      <div style={{ display: "flex", gap: 40 }}>
 
-        {/* ✅ MAP CONTAINER */}
+        {/* ✅ MAP CARD */}
         <div
           style={{
             position: "relative",
@@ -50,7 +48,7 @@ export default function Page() {
           }}
         >
 
-          {/* ✅ THIS IS THE CRITICAL FIXED IMAGE LINE */}
+          {/* ✅ ✅ THIS IS THE ONLY CORRECT IMAGE LINE */}
           <img
             src="/us-map.png"
             alt="US Map"
@@ -88,16 +86,14 @@ export default function Page() {
                       ? PRIMARY
                       : "#9ca3af"
                   }
-                  style={{
-                    cursor: hasData ? "pointer" : "default",
-                  }}
+                  style={{ cursor: hasData ? "pointer" : "default" }}
                 />
               );
             })}
           </svg>
         </div>
 
-        {/* ✅ VENDOR PANEL */}
+        {/* ✅ PANEL */}
         <div style={{ width: 300 }}>
           <h3 style={{ color: PRIMARY }}>
             Vendors {selected && `- ${selected}`}
