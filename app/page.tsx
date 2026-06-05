@@ -39,8 +39,63 @@ export default function Page() {
       <div style={{ display: "flex", gap: 40, alignItems: "flex-start" }}>
 
         {/* 🗺️ MAP SECTION */}
-        <div style={{ position: "relative", width: 700 }}>
+     <div
+  style={{
+    position: "relative",
+    width: 700,
+    background: "white",
+    padding: 10,
+    borderRadius: 12,
+    boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
+  }}
+>
 
+  {/* ✅ MAP IMAGE */}
+  <img
+    src="/us-map.png"
+    style={{ width: "100%", display: "block" }}
+    alt="US Map"
+  />
+
+  {/* ✅ DOT OVERLAY */}
+  <svg
+    viewBox="0 0 700 420"
+    style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+    }}
+  >
+    {Object.keys(statePositions).map((state) => {
+      const pos = statePositions[state];
+      const hasData = vendorData[state];
+
+      return (
+        <circle
+          key={state}
+          cx={pos.x}
+          cy={pos.y}
+          r={10}
+          onClick={() => hasData && setSelected(state)}
+          fill={
+            selected === state
+              ? ACCENT
+              : hasData
+              ? PRIMARY
+              : "#9ca3af"
+          }
+          style={{
+            cursor: hasData ? "pointer" : "default",
+            transition: "0.2s",
+          }}
+        />
+      );
+    })}
+  </svg>
+
+</div>
           {/* ✅ MAP IMAGE */}
           <img
             src="/us-map.png"
