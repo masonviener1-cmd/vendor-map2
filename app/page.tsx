@@ -46,23 +46,36 @@ export default function Page() {
             borderRadius: 12,
             boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
           }}
-        >
-          <img
-            src="/us-map.png"
-            style={{ width: "100%", display: "block" }}
-            alt="US Map"
-          />
+        
+div
+  style={{
+    position: "relative",
+    width: 700,
+    background: "white",
+    padding: 10,
+    borderRadius: 12,
+    boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
+  }}
+>
+  {/* ✅ MAP IMAGE */}
+  <img
+    src="/us-map.png"
+    style={{ width: "100%", display: "block" }}
+    alt="US Map"
+  />
 
-          <svg
-            viewBox="0 0 700 420"
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-            }}
-          >
+  {/* ✅ DOT OVERLAY */}
+  <svg
+    viewBox="0 0 700 420"
+    style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%"
+}}
+  >
+
             {Object.keys(statePositions).map((state) => {
               const pos = statePositions[state];
               const hasData = vendorData[state];
