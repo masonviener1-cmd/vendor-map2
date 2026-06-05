@@ -5,19 +5,19 @@ import { useState } from "react";
 const PRIMARY = "#0c3c5c";
 const ACCENT = "#B3BE35";
 
-// Dot positions (we'll fine tune later)
+// 🔵 Position the dots (we can fine tune later)
 const statePositions: any = {
-  CA:{x:80,y:220},
-  TX:{x:320,y:300},
-  FL:{x:590,y:340},
-  NY:{x:560,y:130},
-  PA:{x:540,y:170},
-  NJ:{x:570,y:180},
-  MD:{x:560,y:200},
-  VA:{x:540,y:230},
+  CA: { x: 80, y: 220 },
+  TX: { x: 320, y: 300 },
+  FL: { x: 590, y: 340 },
+  NY: { x: 560, y: 130 },
+  PA: { x: 540, y: 170 },
+  NJ: { x: 570, y: 180 },
+  MD: { x: 560, y: 200 },
+  VA: { x: 540, y: 230 },
 };
 
-// Your vendor data
+// 📋 Your vendor data
 const vendorData: any = {
   TX: ["Texas Vendor 1", "Texas Vendor 2"],
   MD: ["Maryland Vendor"],
@@ -33,12 +33,12 @@ export default function Page() {
   const [selected, setSelected] = useState<string | null>(null);
 
   return (
-    <div style={{ padding: 20 }}>
-      <h2>Vendor Map Dashboard</h2>
+    <div style={{ padding: 20, fontFamily: "Arial" }}>
+      <h2 style={{ color: PRIMARY }}>Vendor Map Dashboard</h2>
 
-      <div style={{ display: "flex", gap: 40 }}>
+      <div style={{ display: "flex", gap: 40, alignItems: "flex-start" }}>
 
-        {/* MAP */}
+        {/* 🗺️ MAP SECTION */}
         <div style={{ position: "relative", width: 700 }}>
 
           {/* ✅ MAP IMAGE */}
@@ -77,20 +77,25 @@ export default function Page() {
                       ? PRIMARY
                       : "#9ca3af"
                   }
-                  style={{ cursor: hasData ? "pointer" : "default" }}
+                  style={{
+                    cursor: hasData ? "pointer" : "default",
+                    transition: "0.2s",
+                  }}
                 />
               );
             })}
           </svg>
         </div>
 
-        {/* VENDOR PANEL */}
+        {/* 📋 VENDOR PANEL */}
         <div style={{ width: 300 }}>
-          <h3>Vendors {selected && `- ${selected}`}</h3>
+          <h3 style={{ color: PRIMARY }}>
+            Vendors {selected && `- ${selected}`}
+          </h3>
 
           {selected ? (
             <ul>
-              {vendorData[selected]?.map((v: string, i: number) => (
+              {vendorData[selected].map((v: string, i: number) => (
                 <li key={i}>{v}</li>
               ))}
             </ul>
@@ -103,3 +108,4 @@ export default function Page() {
     </div>
   );
 }
+``
