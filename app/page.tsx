@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import USMap from "../components/USMap";
+import USMap from "@/components/USMap"
 
 const vendorData: any = {
   TX: ["Texas Vendor 1", "Texas Vendor 2"],
