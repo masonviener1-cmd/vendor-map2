@@ -5,7 +5,7 @@ import { useState } from "react";
 const PRIMARY = "#0c3c5c";
 const ACCENT = "#B3BE35";
 
-// Dot positions
+// Dot positions (we will fine-tune later if needed)
 const statePositions: any = {
   CA: { x: 85, y: 230 },
   TX: { x: 300, y: 315 },
@@ -50,11 +50,11 @@ export default function Page() {
           }}
         >
 
-          {/* ✅ MAP IMAGE */}
+          {/* ✅ THIS IS THE CRITICAL FIXED IMAGE LINE */}
           <img
             src="/us-map.png"
-            style={{ width: "100%", display: "block" }}
             alt="US Map"
+            style={{ width: "100%", display: "block" }}
           />
 
           {/* ✅ DOT OVERLAY */}
@@ -88,7 +88,9 @@ export default function Page() {
                       ? PRIMARY
                       : "#9ca3af"
                   }
-                  style={{ cursor: hasData ? "pointer" : "default" }}
+                  style={{
+                    cursor: hasData ? "pointer" : "default",
+                  }}
                 />
               );
             })}
