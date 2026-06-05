@@ -5,6 +5,7 @@ import { useState } from "react";
 const PRIMARY = "#0c3c5c";
 const ACCENT = "#B3BE35";
 
+// Dot positions
 const statePositions: any = {
   CA: { x: 85, y: 230 },
   TX: { x: 300, y: 315 },
@@ -16,6 +17,7 @@ const statePositions: any = {
   VA: { x: 500, y: 235 },
 };
 
+// Vendor data
 const vendorData: any = {
   TX: ["Texas Vendor 1", "Texas Vendor 2"],
   MD: ["Maryland Vendor"],
@@ -35,8 +37,8 @@ export default function Page() {
       <h2 style={{ color: PRIMARY }}>Vendor Map Dashboard</h2>
 
       <div style={{ display: "flex", gap: 40, alignItems: "flex-start" }}>
-        
-        {/* MAP */}
+
+        {/* ✅ MAP CONTAINER */}
         <div
           style={{
             position: "relative",
@@ -46,36 +48,26 @@ export default function Page() {
             borderRadius: 12,
             boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
           }}
-        
-div
-  style={{
-    position: "relative",
-    width: 700,
-    background: "white",
-    padding: 10,
-    borderRadius: 12,
-    boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
-  }}
->
-  {/* ✅ MAP IMAGE */}
-  <img
-    src="/us-map.png"
-    style={{ width: "100%", display: "block" }}
-    alt="US Map"
-  />
+        >
 
-  {/* ✅ DOT OVERLAY */}
-  <svg
-    viewBox="0 0 700 420"
-    style={{
-      position: "absolute",
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "100%"
-}}
-  >
+          {/* ✅ MAP IMAGE */}
+          <img
+            src="/us-map.png"
+            style={{ width: "100%", display: "block" }}
+            alt="US Map"
+          />
 
+          {/* ✅ DOT OVERLAY */}
+          <svg
+            viewBox="0 0 700 420"
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+            }}
+          >
             {Object.keys(statePositions).map((state) => {
               const pos = statePositions[state];
               const hasData = vendorData[state];
@@ -103,7 +95,7 @@ div
           </svg>
         </div>
 
-        {/* PANEL */}
+        {/* ✅ VENDOR PANEL */}
         <div style={{ width: 300 }}>
           <h3 style={{ color: PRIMARY }}>
             Vendors {selected && `- ${selected}`}
